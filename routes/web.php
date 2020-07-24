@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use SamuelNitsche\LaravelHetznerDns\HetznerApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', 'login');
+Route::get('/', function (HetznerApi $api) {
+	dd($api->getZoneByName('samynitsche.de'));
+});
+
+// Route::redirect('/', 'login');
 
 Auth::routes();
 

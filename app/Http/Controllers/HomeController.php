@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\HetznerApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use SamuelNitsche\LaravelHetznerDns\HetznerApi;
 
 class HomeController extends Controller
 {
@@ -26,9 +26,6 @@ class HomeController extends Controller
     public function index(HetznerApi $api)
     {
         $records = $api->getAllRecords();
-        $records = $records->groupBy(function ($key, $value) {
-            return $key->getType();
-        });
 
         return view('home', [
             'records' => $records,
